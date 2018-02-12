@@ -60,7 +60,7 @@ lines1, labels1 = ax1.get_legend_handles_labels()
 ax1.legend(lines0 + lines1, labels0 + labels1, loc="center left", bbox_to_anchor=(0.05,0.58), frameon=False)
 
 #save figure
-#plt.savefig('test.png', bbox_inches='tight')
+#plt.savefig('stocks_mpl.png', bbox_inches='tight')
 
 #show figure
 plt.show()
