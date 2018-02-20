@@ -35,7 +35,7 @@ for key in list(notedict): #dictionary will change size in loop, so get keys lis
 print(notedict)
 
 #open audio files
-file = aifc.open('sound_files/5.aif', 'rb')
+file = aifc.open('sound_files/F4_CathedralOrgan.aif', 'rb')
 
 #get number of audio frames in file & sample rate; playtime = (# frames)/(sample rate)
 nframes = file.getnframes()
@@ -53,6 +53,7 @@ x = np.array(audiolist)
 #fast Fourier transform the audio data & generate corresponding frequency values
 X = fft(x[0])
 freqs = fftfreq(len(x[0]))*samplerate
+freq_spacing = samplerate/len(x[0])
 
 #frequencies/amplitudes are symmetric about f=0 Hz; split the array and take positive frequencies
 sliced = np.split(X,2)
@@ -65,8 +66,41 @@ fig, ax = plt.subplots()
 
 #plot fft amplitudes against frequencies
 ax.plot(search_freqs, search_amps)
-ax.set_xlim(0,100)
+ax.set_xlim(100,800)
 ax.set_ylim(0, 50)
+
+possiblenotes = []
+windowsize = 100
+
+#the 'instruments' appear to produce harmonics of the form f/2, f, 3f/2, 2f, etc. where f is the fundamental frequency
+for note in notedict:
+    frequency = notedict[note]/2
+    freq_bin = int(frequency/freq_spacing)
+    avg_amp = np.average(search_amps[int(freq_bin - windowsize/2):int(freq_bin + windowsize/2)])
+    if avg_amp > 20:
+        possiblenotes.append(note)
+
+newnote_truth = [1]*len(possiblenotes)
+threshold = .05
+harmonics = []
+for j in range(20):
+    harmonics.append(1.5 + j*0.5)
+
+
+for i in range(len(possiblenotes)):
+    note1 = notedict[possiblenotes[i]]    
+    for j in range(i+1, len(possiblenotes)):
+        note2 = notedict[possiblenotes[j]]
+        for ratio in harmonics:
+            if np.abs(note2/note1 - ratio) < threshold:
+                print(note1, note2, i, j)
+                newnote_truth[j] = 0
+                
+print(newnote_truth)
+print(possiblenotes)
+               
+
+    #print(search_freqs[int(frequency/freq_spacing)], frequency)
 
 
     
