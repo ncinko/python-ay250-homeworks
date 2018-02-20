@@ -87,7 +87,7 @@ def recordAudio():
     print("recording...")
     frames = []
     try: 
-        while True:
+        while True:  #continue reading in microphone data until keyboard interrupt
             data = stream.read(CHUNK)
             frames.append(data)
     #Keyboard break stops recording
@@ -99,7 +99,8 @@ def recordAudio():
     stream.close()
     audio.terminate()
     
-    #write audio data to file
+    #write audio data to file; could be more elegant by sending data directly over to getAudioText(),
+    #rather than writing and immediately reading 
     waveFile = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
     waveFile.setnchannels(CHANNELS)
     waveFile.setsampwidth(audio.get_sample_size(FORMAT))
@@ -121,10 +122,9 @@ def getAudioText():
       def onError(self, err):
         print("Error: " + str(err))
     
-    
+    #Sending things off to Houndify
     client = houndify.StreamingHoundClient(cred.HOUNDIFY_CLIENT_ID, cred.HOUNDIFY_CLIENT_KEY, "test_user")
     input_file = wave.open(WAVE_OUTPUT_FILENAME)
-
     client.setSampleRate(input_file.getframerate())
     client.start(MyListener())
     
@@ -134,7 +134,7 @@ def getAudioText():
       if client.fill(samples): break
            
     result = client.finish() # returns either final response or error
-    return result['Disambiguation']['ChoiceData'][0]['Transcription']
+    return result['Disambiguation']['ChoiceData'][0]['Transcription']  #return transcribed speech from (many-)nested result dictionary
 
 
     
@@ -142,7 +142,7 @@ def getAudioText():
 def interpretText(text):
     if 'calculate' in text:
         calculate(text)
-    elif 'email' in text:
+    elif ('email' in text or 'male me' in text or 'mail me' in text) and 'subject' in text and 'body' in text:
         sendEmail(text)
     elif 'tell' in text and 'joke' in text:
         getJoke()
@@ -158,7 +158,7 @@ def main():
         recordAudio()
         text = getAudioText()
         print('Monty heard : ' + text)
-        if ("goodbye" in text or "good bye"  in text) and "email" not in text:  #people like to use the word goodbye in email
+        if ("goodbye" in text or "good bye"  in text) and ('email' not in text and 'male me' not in text and 'mail me' not in text):  #people like to use the word goodbye in email
             running = False
             print("Monty says goodbye")
         else:
