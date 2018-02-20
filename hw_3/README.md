@@ -2,7 +2,12 @@
 
 Problem 1:
 
-instructions for my_credentials.py (how to use API services, e-mail, etc.)
+Code solution: hw3_problem1.py
+
+Houndify: see https://www.houndify.com/sdks#python for instructions on creating a new client; move client id and key into my_credentials.py
+Also enter gmail account and password into my_credentials.py; you may need to allow less secure apps through https://myaccount.google.com/lesssecureapps in order to receive emails
+
+'beautifulsoup4' and 'pyaudio' are not default libraries; pip install <library_name> before running script
 
 Problem 2:
 
