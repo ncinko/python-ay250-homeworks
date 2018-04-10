@@ -1,0 +1,26 @@
+Your score: 17/17
+
+Breakdown & Comments: 
+
+----------------------------------------
+Problem 1: 5/5
+----------------------------------------
+1/1: plot with caption
+4/4: analysis
+
+----------------------------------------
+Problem 2: 7/7
+----------------------------------------
+3/3: Recreated plot
+3/3: New dynamic interactions
+1/1: Analysis of changes
+
+Very nice.
+
+----------------------------------------
+Problem 3: 5/5
+----------------------------------------
+5/5: Reproduced plot: title, twin_x, legend, limits, linestyles
+
+
+Graded by C. E. Harris
