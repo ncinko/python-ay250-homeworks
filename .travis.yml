@@ -9,7 +9,7 @@ install:
 
 script:
   - cd hw_2
-  - coverage run hw2_problem1.py
+  - coverage run hw2_problem2.py
 
 after_success:
   - codecov
