@@ -11,6 +11,7 @@ install:
 script:
   - cd hw_8
   - coverage run hw8_fortravis.py
+  - \x03
   
 after_success:
   - codecov
