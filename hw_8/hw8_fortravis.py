@@ -159,8 +159,19 @@ def query():
 def upload_query():
     if request.method == 'POST':
         query_string = request.form['query_string']
-        return redirect(url_for('query', query_string = query_string))           
+        return redirect(url_for('query', query_string = query_string))   
+    
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    return 'Server shutting down...'
    
 if __name__ == '__main__':
     app.run()
-    serial.write('\x03')
+    shutdown()
