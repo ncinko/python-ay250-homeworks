@@ -5,9 +5,14 @@ python:
 
 install:
   - pip install codecov
+  - pip install flask
+  - pip install pybtex
+  - pip install sqlite3
+  - pip install werkzeug
 
 script:
-  - coverage run CI_test.py
-
+  - cd hw_8
+  - coverage run hw8_fortravis.py
+  
 after_success:
   - codecov
