@@ -5,12 +5,9 @@ python:
 
 install:
   - pip install codecov
-  - pip install matplotlib
-  - pip install numpy
 
 script:
-  - cd hw_2
-  - coverage run hw2_problem2.py
+  - coverage run CI_test.py
 
 after_success:
   - codecov
