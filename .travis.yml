@@ -7,10 +7,11 @@ install:
   - pip install codecov
   - pip install flask
   - pip install pybtex
+  - pip install pyserial
 
 script:
   - cd hw_8
-  - coverage run hw8_fortravis.py < testing.txt
+  - coverage run hw8_fortravis.py 
   
 after_success:
   - codecov
