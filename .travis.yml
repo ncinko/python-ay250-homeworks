@@ -7,7 +7,7 @@ install:
   - pip install codecov
 
 script:
-  - coverage run hw2_problem1.py
+  - coverage run hw2/hw2_problem1.py
 
 after_success:
   - codecov
