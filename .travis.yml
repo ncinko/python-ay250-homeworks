@@ -5,7 +5,8 @@ python:
 
 install:
   - pip install codecov
-  - pip install bokeh
+  - pip install matplotlib
+  - pip install numpy
 
 script:
   - cd hw_2
