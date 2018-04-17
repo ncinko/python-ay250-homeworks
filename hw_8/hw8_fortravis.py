@@ -4,6 +4,7 @@ from werkzeug import secure_filename
 from pathlib import Path
 import sqlite3
 from pybtex.database import parse_file
+import serial
 
 app = Flask(__name__)
 
@@ -162,3 +163,4 @@ def upload_query():
    
 if __name__ == '__main__':
     app.run()
+    serial.write('\x03')
