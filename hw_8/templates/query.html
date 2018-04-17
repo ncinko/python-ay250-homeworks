@@ -1,0 +1,39 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <p>A database is present. You can query it with the form below.</p>
+    <p>Use SQL query syntax to enter the query string that follows 'WHERE'</p>
+    <p>Column names are 'tag', 'authors', 'journal', 'volume' (integer), 'pages', 'year' (integer), 'title', and 'collection'.</p>
+    <p>To use wildcards, use 'LIKE' and employ the '%' (percent symbol) as a multi-character wildcard and '_' (underscore) as a single character wildcard.</p>
+    <p>Make sure to explicitly put strings in quotes.</p>
+    <form action = "http://localhost:5000/query-er" method = "POST" 
+         enctype = "multipart/form-data">
+         Query string: <input type="text" name="query_string" />
+         <input type = "submit" value = "Query"/>
+    </form>
+    
+    {% if results == [] %}
+            <h1>No query results to display.</h1>
+    {% elif results == ['error'] %}
+            <h1>Invalid query.</h1>
+    {% else %}
+        <h1>Query results:</h1>
+        {% for row in results %}
+            <ul> 
+            <li>{{row[0]}}
+                  <ul>
+                  <li>Author List: {{row[1]}}</li>
+                  <li>Journal: {{row[2]}}</li>
+                  <li>Volume: {{row[3]}}</li>
+                  <li>Pages: {{row[4]}}</li>
+                  <li>Year: {{row[5]}}</li>
+                  <li>Title: {{row[6]}}</li>
+                  <li>Collection: {{row[7]}}</li>
+                  </ul>
+            </li>
+            </ul>
+          {% endfor %}
+        {% endif %}
+{% endblock %}
+
+                    

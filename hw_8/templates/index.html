@@ -1,0 +1,14 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    {% if db == 0 %}
+      <h1>There is no database present; one has been created for you.</h1>
+      
+    {% else %}
+      <h1>A database is present.  These are your available collections:</h1>
+      {% for collection in collections %}
+        <h2>{{ collection }}<h2> 
+      {% endfor %}
+    {% endif %}
+      
+{% endblock %}
