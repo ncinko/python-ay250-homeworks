@@ -1,2 +1,13 @@
 language: python
-python: "3.6"
+
+python:
+  - 3.6
+
+install:
+  - pip install codecov
+
+script:
+  - coverage run hw2_problem1.py
+
+after_success:
+  - codecov
