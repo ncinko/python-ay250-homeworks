@@ -63,4 +63,4 @@ ax1.legend(lines0 + lines1, labels0 + labels1, loc="center left", bbox_to_anchor
 #plt.savefig('stocks_mpl.png', bbox_inches='tight')
 
 #show figure
-plt.show()
+#plt.show()
