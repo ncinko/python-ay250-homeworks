@@ -7,8 +7,6 @@ install:
   - pip install codecov
   - pip install flask
   - pip install pybtex
-  - pip install sqlite3
-  - pip install werkzeug
 
 script:
   - cd hw_8
