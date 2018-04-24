@@ -1,0 +1,1 @@
+This directory initially contains no files.  Upon running the web app, a database file is created: 'biblio.db'.  Any '.bib' files the user uploads are also stored here.
